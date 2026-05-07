@@ -1,0 +1,14 @@
+com\salac\petstore\model\WishlistItem.class
+com\salac\petstore\api\PetController.class
+com\salac\petstore\model\FilterCriteria.class
+com\salac\petstore\model\CartItem.class
+com\salac\petstore\model\Pet.class
+com\salac\petstore\service\ShoppingService.class
+com\salac\petstore\PetStoreApplication.class
+com\salac\petstore\service\PetService.class
+com\salac\petstore\api\ShoppingController.class
+com\salac\petstore\repository\PetRepository.class
+com\salac\petstore\config\WebConfig.class
+com\salac\petstore\repository\WishlistRepository.class
+com\salac\petstore\repository\CartRepository.class
+com\salac\petstore\api\ShoppingController$PetActionRequest.class

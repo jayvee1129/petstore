@@ -1,0 +1,29 @@
+-- V1__Create_pet_tables.sql
+CREATE TABLE pet (
+    id BIGSERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    breed VARCHAR(100),
+    age INTEGER,
+    price DECIMAL(10,2) NOT NULL,
+    description TEXT,
+    image_url VARCHAR(500),
+    available BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE cart_item (
+    id BIGSERIAL PRIMARY KEY,
+    pet_id BIGINT NOT NULL REFERENCES pet(id),
+    quantity INTEGER DEFAULT 1,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(pet_id)
+);
+
+CREATE TABLE wishlist_item (
+    id BIGSERIAL PRIMARY KEY,
+    pet_id BIGINT NOT NULL REFERENCES pet(id),
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(pet_id)
+);

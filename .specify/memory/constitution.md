@@ -1,50 +1,51 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report
+Version change: none -> 1.0.0
+Modified principles: N/A (initial constitution)
+Added sections: Core Principles, Technology & Deployment Constraints, Development Workflow, Governance
+Removed sections: none
+Templates requiring updates: .specify/templates/plan-template.md ⚠ validated no updates required, .specify/templates/spec-template.md ⚠ validated no updates required, .specify/templates/tasks-template.md ⚠ validated no updates required
+Follow-up TODOs: none
+-->
+
+# PetStore Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Product Clarity and Customer Value
+PetStore exists to make buying and managing pet products easy, trustable, and transparent. Every feature MUST map to a clearly stated buyer journey for dogs, cats, birds, or fish, and every implementation decision MUST preserve the simplicity of the shopping and checkout experience.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Full-Stack Consistency and Maintainability
+The application MUST use a Java Spring Boot backend with PostgreSQL, and a React frontend styled with Tailwind and MUI. The backend and frontend MUST be designed so that data contracts are explicit, shareable, and testable.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Package and API Naming Discipline
+All Java code MUST use the `com.salac.petstore` package namespace. All public API endpoints MUST begin with `/salac` to make routing predictable, stable, and searchable. No alternate base paths are allowed without documented approval.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Testable Integration and Deployment Readiness
+Every release candidate MUST include automated service-level tests for backend APIs and end-to-end validation of the React UI where feasible. Docker-based local builds MUST be runnable and must reflect the Render free-tier deployment constraints.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Cost-Conscious Deployment and Free-Tier Discipline
+PetStore MUST be designed for Render free-tier deployment: lightweight containers, minimal runtime dependencies, and simple environment configuration. Cloud infrastructure choices MUST avoid paid-only services and keep the deployment path reproducible.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technology and Deployment Constraints
+PetStore’s technology stack is defined as Java Spring Boot backend, PostgreSQL database, Docker containerization, React frontend, Tailwind CSS, and MUI. Deployment MUST target Render free-tier services, using containers for both frontend and backend when possible. Secrets and environment configuration MUST be managed in a way that is compatible with Render’s free-tier environment variables.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
-
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
-
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow and Quality Gates
+Development MUST follow a clear workflow:
+- Define and prioritize user stories in the feature specification.
+- Implement foundation work first: API structure, data model, and deployment configuration.
+- Validate each story independently with tests before merging.
+- Use code review to verify package naming, API path discipline, and deployment readiness.
+- Document any deviations from the Render free-tier deployment assumptions in the PR description.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
+This constitution defines the core rules for PetStore development and deployment. All implementation work MUST comply with these principles unless a formal amendment is approved.
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+Amendments require a documented PR that explains the change, the reason, and the impact on existing deployment or naming rules. Version increments follow semantic versioning:
+- MAJOR for incompatible principle or governance changes
+- MINOR for new principles or added mandatory sections
+- PATCH for wording clarifications, typos, and non-behavioral refinements
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+All PRs MUST include a compliance check against this constitution for technology stack, API naming, deployment assumptions, and test coverage expectations. When a principle cannot be followed immediately, the deviation MUST be documented with a remediation plan.
+
+**Version**: 1.0.0 | **Ratified**: 2026-05-06 | **Last Amended**: 2026-05-06
