@@ -1,26 +1,48 @@
 services:
   - type: web
-    name: petstore-backend
-    runtime: java
-    plan: starter
+    name: petstore-api
+    plan: free
+    env: docker
     branch: main
-    rootDir: backend
-    buildCommand: ./mvnw -B package -DskipTests
-    startCommand: java -Dserver.port=$PORT -jar target/petstore-backend-0.0.1-SNAPSHOT.jar
-    autoDeploy: true
+    dockerContext: ./backend
+    dockerfilePath: ./backend/Dockerfile
     envVars:
-      - key: JAVA_VERSION
-        value: 17
+      - key: SPRING_PROFILES_ACTIVE
+        value: postgres
+      - key: SPRING_DATASOURCE_URL
+        fromDatabase:
+          name: petstore-db
+          property: connectionString
+      - key: SPRING_DATASOURCE_USERNAME
+        fromDatabase:
+          name: petstore-db
+          property: user
+      - key: SPRING_DATASOURCE_PASSWORD
+        fromDatabase:
+          name: petstore-db
+          property: password
 
-  - type: static
-    name: petstore-frontend
-    runtime: static
-    plan: starter
+  - type: web
+    name: petstore-web
+    plan: free
+    env: static
     branch: main
     rootDir: frontend
-    buildCommand: npm install && npm run build
-    publishPath: dist
-    autoDeploy: true
+    buildCommand: npm ci && npm run build
+    staticPublishPath: dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
     envVars:
-      - key: NODE_ENV
-        value: production
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: petstore-api
+          envVarKey: RENDER_EXTERNAL_URL
+
+databases:
+  - name: petstore-db
+    plan: free
+    databaseName: petstore
+    user: petstore
