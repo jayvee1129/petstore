@@ -9,10 +9,18 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: postgres
-      - key: SPRING_DATASOURCE_URL
+      - key: DB_HOST
         fromDatabase:
           name: db_petstore
-          property: connectionString
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: db_petstore
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: db_petstore
+          property: database
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
           name: db_petstore
@@ -21,6 +29,8 @@ services:
         fromDatabase:
           name: db_petstore
           property: password
+      - key: DB_SSL_MODE
+        value: require
 
   - type: web
     name: petstore-web
