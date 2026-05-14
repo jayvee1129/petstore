@@ -1,0 +1,21 @@
+# Java / Maven
+**/target/
+**/out/
+**/*.log
+*.class
+
+# Node
+frontend/node_modules/
+frontend/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE and editor
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
