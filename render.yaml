@@ -6,7 +6,6 @@ services:
     branch: main
     dockerContext: ./backend
     dockerfilePath: ./backend/Dockerfile
-    dockerCommand: java -Dserver.address=0.0.0.0 -Dserver.port=${PORT:-10000} -jar /app/app.jar
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: postgres
