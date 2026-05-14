@@ -24,7 +24,6 @@ services:
 
   - type: web
     name: petstore-web
-    plan: free
     env: static
     branch: main
     rootDir: frontend
