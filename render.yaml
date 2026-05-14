@@ -2,7 +2,7 @@ services:
   - type: web
     name: petstore-api
     plan: free
-    env: docker
+    runtime: docker
     branch: main
     dockerContext: ./backend
     dockerfilePath: ./backend/Dockerfile
