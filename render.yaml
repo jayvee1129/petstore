@@ -7,6 +7,8 @@ services:
     dockerContext: ./backend
     dockerfilePath: ./backend/Dockerfile
     envVars:
+      - key: PORT
+        value: "10000"
       - key: SPRING_PROFILES_ACTIVE
         value: postgres
       - key: DB_HOST
