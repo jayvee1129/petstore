@@ -14,25 +14,28 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-      temp:
-        use_jdbc_metadata_defaults: false
-    show-sql: true
+    show-sql: false
     defer-datasource-initialization: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
+        format_sql: false
 
   flyway:
-    enabled: true
-    baseline-on-migrate: true
+    enabled: false
+    baseline-on-migrate: false
     locations: classpath:db/migration
+
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
 
 server:
   address: 0.0.0.0
   port: ${PORT:10000}
+  shutdown: graceful
 
 logging:
   level:
+    root: INFO
     com.salac.petstore: DEBUG
-    org.springframework.web: DEBUG
+    org.springframework.boot: INFO
+    org.springframework.web: INFO

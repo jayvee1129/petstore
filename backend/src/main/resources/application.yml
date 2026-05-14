@@ -11,25 +11,28 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
-    show-sql: true
+    show-sql: false
     defer-datasource-initialization: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-        format_sql: true
+        format_sql: false
 
   flyway:
     enabled: true
     locations: classpath:db/migration
 
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
 server:
   address: 0.0.0.0
   port: ${PORT:10000}
+  shutdown: graceful
 
 logging:
   level:
+    root: INFO
     com.salac.petstore: DEBUG
-    org.springframework.web: DEBUG
 
 # Production persistence uses PostgreSQL.
 # Activate with SPRING_PROFILES_ACTIVE=postgres or spring.profiles.active=postgres
