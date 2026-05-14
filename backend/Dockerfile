@@ -1,13 +1,12 @@
 # Use a Maven builder image to compile the Spring Boot app
-FROM eclipse-temurin:17-jdk-jammy AS build
+FROM maven:3.9.8-eclipse-temurin-17 AS build
 WORKDIR /workspace
 
-COPY mvnw pom.xml .
+COPY pom.xml .
 COPY .mvn .mvn
 COPY src ./src
 
-RUN chmod +x ./mvnw
-RUN ./mvnw -B package -DskipTests
+RUN mvn -B package -DskipTests
 
 # Runtime image
 FROM eclipse-temurin:17-jre-jammy
