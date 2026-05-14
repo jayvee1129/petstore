@@ -11,15 +11,15 @@ services:
         value: postgres
       - key: SPRING_DATASOURCE_URL
         fromDatabase:
-          name: petstore-db
+          name: db_petstore
           property: connectionString
       - key: SPRING_DATASOURCE_USERNAME
         fromDatabase:
-          name: petstore-db
+          name: db_petstore
           property: user
       - key: SPRING_DATASOURCE_PASSWORD
         fromDatabase:
-          name: petstore-db
+          name: db_petstore
           property: password
 
   - type: web
@@ -42,7 +42,7 @@ services:
           envVarKey: RENDER_EXTERNAL_URL
 
 databases:
-  - name: petstore-db
+  - name: db_petstore
     plan: free
     databaseName: petstore
     user: petstore
