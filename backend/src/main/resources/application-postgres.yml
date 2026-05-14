@@ -1,6 +1,4 @@
 spring:
-  profiles: postgres
-
   datasource:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/petstore}
     username: ${SPRING_DATASOURCE_USERNAME:petstore}
