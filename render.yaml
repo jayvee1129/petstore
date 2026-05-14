@@ -1,7 +1,7 @@
 services:
-  - type: web_service
+  - type: web
     name: petstore-backend
-    env: java
+    runtime: java
     plan: starter
     branch: main
     rootDir: backend
@@ -12,8 +12,10 @@ services:
       - key: JAVA_VERSION
         value: 17
 
-staticSites:
-  - name: petstore-frontend
+  - type: static
+    name: petstore-frontend
+    runtime: static
+    plan: starter
     branch: main
     rootDir: frontend
     buildCommand: npm install && npm run build
