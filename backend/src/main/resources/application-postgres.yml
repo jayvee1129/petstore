@@ -1,13 +1,21 @@
 spring:
   datasource:
-    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=${DB_SSL_MODE:require}
-    username: ${SPRING_DATASOURCE_USERNAME:petstore}
-    password: ${SPRING_DATASOURCE_PASSWORD:password}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://${DB_HOST:${PGHOST:localhost}}:${DB_PORT:${PGPORT:5432}}/${DB_NAME:${PGDATABASE:${POSTGRES_DB:petstore}}}?sslmode=${DB_SSL_MODE:require}}
+    username: ${SPRING_DATASOURCE_USERNAME:${DB_USER:${POSTGRES_USER:petstore}}}
+    password: ${SPRING_DATASOURCE_PASSWORD:${DB_PASSWORD:${POSTGRES_PASSWORD:password}}}
     driver-class-name: org.postgresql.Driver
+    hikari:
+      initialization-fail-timeout: -1
+      connection-timeout: 30000
+      maximum-pool-size: 10
+      minimum-idle: 1
+      validation-timeout: 5000
 
   jpa:
     hibernate:
       ddl-auto: validate
+      temp:
+        use_jdbc_metadata_defaults: false
     show-sql: true
     defer-datasource-initialization: true
     properties:
@@ -17,6 +25,7 @@ spring:
 
   flyway:
     enabled: true
+    baseline-on-migrate: true
     locations: classpath:db/migration
 
 server:
