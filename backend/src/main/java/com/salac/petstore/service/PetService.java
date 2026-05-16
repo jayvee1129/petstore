@@ -3,6 +3,8 @@ package com.salac.petstore.service;
 import com.salac.petstore.model.FilterCriteria;
 import com.salac.petstore.model.Pet;
 import com.salac.petstore.repository.PetRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,8 @@ import java.util.List;
 
 @Service
 public class PetService {
+
+    private static final Logger log = LoggerFactory.getLogger(PetService.class);
 
     @Autowired
     private PetRepository petRepository;
@@ -24,6 +28,19 @@ public class PetService {
     }
 
     public List<Pet> searchPets(FilterCriteria criteria) {
+        if (criteria == null || (
+                criteria.getSearch() == null &&
+                criteria.getType() == null &&
+                criteria.getBreed() == null &&
+                criteria.getMinPrice() == null &&
+                criteria.getMaxPrice() == null &&
+                criteria.getMinAge() == null &&
+                criteria.getMaxAge() == null
+        )) {
+            log.debug("No filter criteria provided, returning all available pets");
+            return petRepository.findByAvailableTrue();
+        }
+
         return petRepository.findPetsWithFilters(
                 criteria.getSearch(),
                 criteria.getType(),
