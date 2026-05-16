@@ -1,4 +1,8 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || `${location.protocol}//${location.hostname}${location.port ? ':' + location.port : ''}/salac`;
+let API_BASE_URL = import.meta.env.VITE_API_BASE_URL || `${location.protocol}//${location.hostname}${location.port ? ':' + location.port : ''}`;
+// Ensure /salac is appended if not already present
+if (!API_BASE_URL.endsWith('/salac')) {
+    API_BASE_URL = API_BASE_URL.replace(/\/$/, '') + '/salac';
+}
 
 class ApiClient {
     constructor() {

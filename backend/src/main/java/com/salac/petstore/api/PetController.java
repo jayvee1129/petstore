@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/salac")
-@CrossOrigin(origins = "*")
 public class PetController {
 
     @Autowired
