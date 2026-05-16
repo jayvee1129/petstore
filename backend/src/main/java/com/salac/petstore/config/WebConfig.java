@@ -10,7 +10,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/salac/**")
-                .allowedOrigins("http://localhost:5173", "http://localhost:3000")
+                // Allow local dev origins and any deployed frontend origin (Render, Vercel, etc.).
+                // For stricter security, replace with explicit origins or read from env.
+                .allowedOrigins("*")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(false);

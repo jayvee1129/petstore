@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8080/salac';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || `${location.protocol}//${location.hostname}${location.port ? ':' + location.port : ''}/salac`;
 
 class ApiClient {
     constructor() {
