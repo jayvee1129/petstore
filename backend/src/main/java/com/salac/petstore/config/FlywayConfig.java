@@ -28,7 +28,11 @@ public class FlywayConfig {
                         .dataSource(dataSource)
                         .locations(locations)
                         .baselineOnMigrate(baselineOnMigrate)
+                        .validateOnMigrate(false)
                         .load();
+
+                log.info("Repairing Flyway schema history if needed");
+                flyway.repair();
 
                 flyway.migrate();
                 log.info("Flyway migrations completed successfully");
